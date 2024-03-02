@@ -1,0 +1,96 @@
+{% extends 'layout/base.html' %}
+
+
+{% load static %}
+
+{% block title %}BestThings{% endblock %}
+
+{% block customCDNS %}{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	<li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">BUSSINESS Dashboard</strong></li>
+    {% endblock %}
+    
+    {% block content %}
+    
+    <div class="row">
+        <div class="col">
+            <p>Sale Details</p>
+            <a href="/Sales" class="btn btn-sm btn-primary mb-2 float-end" >Back</a>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row my-8">
+                        <div class="col-6">
+                            <p class="h3">{{invoice_obj.company_name}}</p>
+                            <address>
+                            Street Address<br>
+                            {{invoice_obj.cities.name}}, {{invoice_obj.state.name}}<br>
+                            {{invoice_obj.country.country_name}}, {{invoice_obj.postal_code}}<br>
+                            {{invoice_obj.email}}
+                            </address>
+                        </div>
+                        <div class="col-6 text-right">
+                            <p class="h3">CCMS</p>
+                            <address>
+                            Street Address<br>
+                            State, City<br>
+                            Region, Postal Code<br>
+                            ctr@example.com
+                            </address>
+                        </div>
+                    </div>
+                    <div class="table-responsive push">
+                        {% if product_obj %}
+                        
+                        
+                        <table class="table table-bordered table-hover text-nowrap">
+                            <tbody><tr>
+                                <th class="text-center width35"></th>
+                                <th>Product</th>
+                                <th class="text-center" style="width: 1%">Qnt</th>
+                                <th class="text-right" style="width: 1%">Unit</th>
+                                <th class="text-right" style="width: 1%">Amount</th>
+                            </tr>
+                            {% for i in product_obj %}
+                            
+                            <tr>
+                                <td class="text-center">{{forloop.counter}}</td>
+                                <td>
+                                    <p class="font600 mb-1">{{i.fk_product.product_name}}</p>
+                                    <div class="text-muted">{{i.fk_product.fk_category.category_name}} Model {{i.fk_product.model}}</div>
+                                </td>
+                                <td class="text-center">{{i.qty}}</td>
+                                <td class="text-right">Rs. {{i.fk_product.unit_price}}</td>
+                                <td class="text-right">Rs. {{i.total_amount}}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr class="bg-green text-light">
+                                <td colspan="4" class="font700 text-right">Total Amount</td>
+                                <td class="font700 text-right">Rs. {{total_amount}}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        {% else %}
+                             <p class="text-center h5">Pending</p>
+                        {% endif %}
+                    </div>
+                    <p class="text-muted text-center">Thank you very much for doing business with us. We look forward to working with you again!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customScripts %}
+	<script type="module" src="{% static 'adminpanel/assets/js/kycapproved.js' %}"></script>
+
+<script>
+
+</script>
+
+{% endblock %}

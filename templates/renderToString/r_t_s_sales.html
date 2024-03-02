@@ -1,0 +1,38 @@
+{% load static %}
+<table class="table table-hover table-vcenter text-nowrap table_custom list">
+    <thead>
+        <th>Sr.no</th>
+        <th>Company Name </th>
+        <th>Email</th>
+        <th>Address</th>
+        <th class="text-center">Action</th>
+    </thead>
+    <tbody>
+        {% for i in sale_obj %}
+            <tr class="">
+                <td class="hidden-xs">
+                    <div class="text-muted text-center">{{forloop.counter}}</div>
+                </td>
+                <td>
+                    <div><a href="javascript:void(0);">{{i.company_name}}</a></div>
+                    <div class="text-muted">+91 {{i.mobile_no}}</div>
+                </td>
+                <td class="hidden-xs">
+                    <div class="text-muted">{{i.email}}</div>
+                </td>
+                <td class="hidden-sm">
+                    <div class="text-muted">{{i.cities.name}} {{i.state.name}} {{i.country.country_name}}, {{i.postal_code}} </div>                                                
+                </td>
+                <td class="text-right">
+                    {% if i.success %}
+                        <span class="tag tag-green">Completed</span>
+                    {% else %}
+                        <span class="tag tag-orange">Pending</span>
+                    {% endif %}
+                    <a class="btn btn-icon btn-sm" href="/Invoice/{{i.id}}" data-toggle="tooltip" title="View Sale" data-original-title="Phone"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-icon btn-sm text-danger hidden-xs js-sweetalert" data-type="confirm" href="javascript:void(0)" data-toggle="tooltip" title="Delete Record" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

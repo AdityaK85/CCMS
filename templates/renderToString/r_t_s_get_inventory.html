@@ -1,0 +1,84 @@
+{% if get_obj %}
+
+
+<table id="datatable" class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+    <thead>
+        <tr>
+            <th>Sr no.</th>
+            <th>Product</th>
+            <th>Number</th>
+            <th>Model</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in get_obj %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_no}}</td>
+                <td>{{i.model}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.unit_price}}</td>
+                <td>
+                    <button type="button" class="btn btn-icon btn-sm" title="View" onclick="show_qty_price_field('{{forloop.counter}}_add_product', this)" ><i class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                </td>
+            </tr>
+
+            <div class="row justify-content-end mt-3" style="display: none" id="{{forloop.counter}}_add_product">
+
+                    <div class="col-sm-3">
+                        <div class="mt-4 mt-sm-0">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <input type="text" disabled  value="{{i.product_name}}"  class="form-control" placeholder="Enter QTY ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="mt-4 mt-sm-0">
+                            <div class="form-group">
+                                <label>Model</label>
+                                <input type="text" disabled value="{{i.product_no}}" class="form-control" placeholder="Enter QTY ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="mt-4 mt-sm-0">
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="text" value="{% if i.prev_qty %}{{i.prev_qty}}{% else %}1{% endif %}" onkeyup="getQty(this.value, '{{i.unit_price}}' , 'total_price_{{forloop.counter}}')" id="input_qty_{{forloop.counter}}" 
+                                oninput="this.value = this.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1'); if(parseFloat(this.value) > {{i.quantity}}) this.value = '{{i.quantity}}'; if(parseFloat(this.value) < 1)  this.value = '1';" 
+                                class="form-control" placeholder="Enter QTY ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 ">
+                        <div class="mt-4 mt-sm-0">
+                            <div class="form-group">
+                                <label>Total Price </label>
+                                <input type="text" disabled id="total_price_{{forloop.counter}}" value="{% if i.prev_price %}{{i.prev_price}} {% else %}{{i.unit_price}}{% endif %}" oninput="this.value = this.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Enter Price ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 mt-4" style="width: 4.333333% !important;" >
+                        <div class="mt-4 mt-sm-0">
+                            <button class="btn btn-success  float-end" onclick="sale_product('{{i.id}}' , 'input_qty_{{forloop.counter}}' , 'total_price_{{forloop.counter}}', '{{i.on_update}}' ) " ,type="button"> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+
+
+<p>Product Not Found</p>
+
+{% endif %}

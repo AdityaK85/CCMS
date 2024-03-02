@@ -1,0 +1,101 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block title %}BestThings{% endblock %}
+
+{% block customCDNS %}{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	{% comment %} <li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">INVENTORY</strong></li> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="tab-content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Add Product</h3>
+        </div>
+        <form class="card-body">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Name <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <input type="text" id="product_name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Product Number <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <input type="text" id="product_no" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Category  <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <select class="form-control" id="category_name" name="select">
+                        <option value="">Select...</option>
+                        {% for i in catgory_obj %}
+                            <option value="{{i.id}}">{{i.category_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Model <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <input type="text" id="model" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Quantity <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <input type="text" id="quantity" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Unit Price <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <input type="text"id="unit_price" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Supplier Info <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <input type="text" id="supplier_info" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Note <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <textarea rows="4" id="note" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"></label>
+                <div class="col-md-6">
+                    <button type="button" onclick="SaveInventory(this , '')" class="btn btn-primary">Submit</button>
+                    <button type="button"  class="btn btn-outline-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block customScripts %}
+	<script type="module" src="{% static 'adminpanel/panel_js/inventory.js' %}"></script>
+
+<script>
+
+</script>
+
+{% endblock %}

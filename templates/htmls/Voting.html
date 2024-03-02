@@ -1,0 +1,59 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block title %}BestThings{% endblock %}
+
+{% block customCDNS %}{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	<li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">BUSSINESS Dashboard</strong></li>
+{% endblock %}
+
+{% block content %}
+<div class="row clearfix mt-2">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h6>Planned</h6>
+                                        <div style="display:inline;width:90px;height:90px;"><canvas width="90" height="90"></canvas><input type="text" class="knob" value="23" data-width="90" data-height="90" data-thickness="0.1" data-fgcolor="#2185d0" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font: bold 18px Arial; text-align: center; color: rgb(33, 133, 208); padding: 0px; appearance: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h6>In progress</h6>
+                                        <div style="display:inline;width:90px;height:90px;"><canvas width="90" height="90"></canvas><input type="text" class="knob" value="43" data-width="90" data-height="90" data-thickness="0.1" data-fgcolor="#f2711c" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font: bold 18px Arial; text-align: center; color: rgb(242, 113, 28); padding: 0px; appearance: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h6>Completed</h6>
+                                        <div style="display:inline;width:90px;height:90px;"><canvas width="90" height="90"></canvas><input type="text" class="knob" value="83" data-width="90" data-height="90" data-thickness="0.1" data-fgcolor="#21ba45" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font: bold 18px Arial; text-align: center; color: rgb(33, 186, 69); padding: 0px; appearance: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h6>In Completed</h6>
+                                        <div style="display:inline;width:90px;height:90px;"><canvas width="90" height="90"></canvas><input type="text" class="knob" value="12" data-width="90" data-height="90" data-thickness="0.1" data-fgcolor="#e03997" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font: bold 18px Arial; text-align: center; color: rgb(224, 57, 151); padding: 0px; appearance: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+{% endblock %}
+
+{% block customScripts %}
+	<script type="module" src="{% static 'adminpanel/assets/js/kycapproved.js' %}"></script>
+
+<script>
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<table id="datatable" class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+    <thead>
+        <tr>
+            <th>Sr no.</th>
+            <th>Product</th>
+            <th>Number</th>
+            <th>Category</th>
+            <th>Model</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Supplier Info</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in inventory_obj %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_no}}</td>
+                <td>{{i.fk_category.category_name}}</td>
+                <td>{{i.model}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.unit_price}}</td>
+                <td>{{i.supplier_info}}</td>
+                <td><span class="tag tag-warning">Part-time</span></td>
+                <td>
+                <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

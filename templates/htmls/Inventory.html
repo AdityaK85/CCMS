@@ -1,0 +1,44 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block title %}BestThings{% endblock %}
+
+{% block customCDNS %}{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	<li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">INVENTORY</strong></li>
+{% endblock %}
+
+{% block content %}
+
+
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="Fees-all">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            {{render_str}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{% endblock %}
+
+{% block customScripts %}
+	<script type="module" src="{% static 'adminpanel/panel_js/inventory.js' %}"></script>
+
+<script>
+
+</script>
+
+{% endblock %}
