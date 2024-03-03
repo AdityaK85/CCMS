@@ -67,13 +67,16 @@ def SaveSales(request):
         SalesMaster.objects.filter(id = val_id).update(**data)
         obj = SalesMaster.objects.get(id = val_id)
         obj.save()
+        msg = 'Details Modified'
     else:
+        
         obj = SalesMaster.objects.create(**data)
         obj.country_id = request.POST.get('country')
         obj.state_id = request.POST.get('state')
         obj.cities_id = request.POST.get('cities')
         obj.save()
-    send_data = {'status': 1 , 'obj_id' : obj.id ,  'msg' : f'Details { 'Modified' if val_id != '' else 'Saved' }  ' }
+        msg = 'Details Saved'
+    send_data = {'status': 1 , 'obj_id' : obj.id ,  'msg' : msg }
     return JsonResponse(send_data)
 
 
@@ -87,9 +90,11 @@ def SavePurchased(request):
         PurchasedMaster.objects.filter(id = val_id).update(**data)
         obj = PurchasedMaster.objects.get(id = val_id)
         obj.save()
+        msg = 'Vendor Details Modified'
     else:
         obj = PurchasedMaster.objects.create(**data)
-    send_data = {'status': 1 , 'obj_id' : obj.id ,  'msg' : f'Vendor Details { 'Modified' if val_id != '' else 'Saved' }  ' }
+        msg = 'Vendor Details Saved'
+    send_data = {'status': 1 , 'obj_id' : obj.id ,  'msg' : msg }
     return JsonResponse(send_data)
 
 @csrf_exempt
@@ -100,12 +105,13 @@ def SaveService(request):
 
     if id != "" and CategoryMaster.objects.filter(id = id).exists() :
         CategoryMaster.objects.filter(id = id).update(category_name = service_name)
+        msg = 'Services Updated'
     else:
         obj = CategoryMaster.objects.create(category_name = service_name)
-    
+        msg = 'Services Added'
     cat_obj = CategoryMaster.objects.all().order_by('-id')
     rendered = render_to_string('renderToString/r_t_s_category.html', {'cat_obj' : cat_obj})
-    send_data = {'status': 1 , 'rendered_str' : rendered ,  'msg' : f'Service { 'Modified' if id != '' else 'Saved' }  ' }
+    send_data = {'status': 1 , 'rendered_str' : rendered ,  'msg' : msg }
     return JsonResponse(send_data)
 
 @csrf_exempt
