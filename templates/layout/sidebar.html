@@ -6,7 +6,7 @@
 		<div class="hleft">
 			<a class="header-brand" href="index.html"><i class="fa fa-graduation-cap brand-logo"></i></a>
 			<div class="dropdown">
-				<a href="javascript:void(0)" class="nav-link icon menu_toggle"><i class="fe fe-align-center"></i></a>
+				{% comment %} <a href="javascript:void(0)" class="nav-link icon menu_toggle"><i class="fe fe-align-center"></i></a> {% endcomment %}
 				<!-- <a href="page-search.html" class="nav-link icon"><i class="fe fe-search" data-toggle="tooltip" data-placement="right" title="Search..."></i></a>
 				<a href="app-email.html"  class="nav-link icon app_inbox"><i class="fe fe-inbox" data-toggle="tooltip" data-placement="right" title="Inbox"></i></a>
 				<a href="app-filemanager.html"  class="nav-link icon app_file xs-hide"><i class="fe fe-folder" data-toggle="tooltip" data-placement="right" title="File Manager"></i></a>
@@ -228,7 +228,7 @@
 
 <!-- Start Main leftbar navigation -->
 <div id="left-sidebar" class="sidebar">
-	<h5 class="brand-name">CCMS<a href="javascript:void(0)" class="menu_option float-right"><i class="icon-grid font-16" data-toggle="tooltip" data-placement="left" title="" data-original-title="Grid &amp; List Toggle"></i></a></h5>
+	<h5 class="brand-name">CCMS</h5>
 	<ul class="nav nav-tabs">
 		<!-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu-uni">University</a></li> -->
 		<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu-admin">Admin</a></li>
@@ -237,17 +237,19 @@
 		<div class="tab-pane fade show active" id="menu-admin" role="tabpanel">
 			<nav class="sidebar-nav">
 				<ul class="metismenu">
-					<li><a href="/BestThings"><i class="fa fa-credit-card"></i><span>Dashboard</span></a></li>
+					<li><a href="/Dashboard"><i class="fa fa-credit-card"></i><span>Dashboard</span></a></li>
+					<li><a href="/Categories"><i class="fa fa-truck"></i><span>Services</span></a></li>
+					{% comment %} <li><a href="transport.html"><i class="fa fa-truck"></i><span>Customer</span></a></li> {% endcomment %}
+					<li><a href="/Sales"><i class="fa fa-list-ul"></i><span>Sales</span></a></li>
+					<li><a href="/Purchased"><i class="fa fa-bed"></i><span>Purchase</span></a></li>
+					<li><a href="/Manage-Vendor"><i class="fa fa-bed"></i><span>Manage Vendors</span></a></li>
 					<li><a href="/AddInventory"><i class="fa fa-dashboard"></i><span>Add Product</span></a></li>
 					<li><a href="/Inventory"><i class="fa fa-dashboard"></i><span>Inventory</span></a></li>
-					<li><a href="transport.html"><i class="fa fa-truck"></i><span>Services</span></a></li>
-					<li><a href="transport.html"><i class="fa fa-truck"></i><span>Customer</span></a></li>
-					<li><a href="/Sales"><i class="fa fa-list-ul"></i><span>Sales</span></a></li>
-					<li><a href="hostel.html"><i class="fa fa-bed"></i><span>Purchase</span></a></li>
-					<li><a href="setting.html"><i class="fa fa-gear"></i><span>Settings</span></a></li>
+					{% comment %} <li><a href="setting.html"><i class="fa fa-gear"></i><span>Settings</span></a></li> {% endcomment %}
 				</ul>
 			</nav>
 		</div>
 	</div>
 </div>
 
+<script type="module" src="{% static 'adminpanel/panel_js/login.js' %}"></script>

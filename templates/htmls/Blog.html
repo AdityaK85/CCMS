@@ -125,7 +125,7 @@
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group">
                                         <label>Select Service</label>
-                                        <select class="form-select" onchange="getInventory()" id="category_id" name="select">
+                                        <select class="form-select" onchange="getInventory('inventory_div')" id="category_id" name="select">
                                             <option value="">Select...</option>
                                             {% for i in catgory_obj %}
                                                 <option value="{{i.id}}">{{i.category_name}}</option>
@@ -137,30 +137,71 @@
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group">
                                         <label>Product Number</label>
-                                        <input type="number" onchange="getInventory()" id="product_no" class="form-control" placeholder="Enter Product Number">
+                                        <input type="number" onchange="getInventory('inventory_div')" id="product_no" class="form-control" placeholder="Enter Product Number">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group">
                                         <label>Product Name</label>
-                                        <input type="text" onchange="getInventory()"  id="product_name" class="form-control" placeholder="Enter Product Name">
+                                        <input type="text" onchange="getInventory('inventory_div')"  id="product_name" class="form-control" placeholder="Enter Product Name">
                                     </div>
                                 </div>
                             </div>
                             <div class="table-responsive" id="inventory_div">
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-lg-12 mt-3">
-                                    <button type="submit" class="btn btn-primary">Next</button>
-                                    <button type="submit" class="btn btn-default">Cancel</button>
-                                </div>
                             </div>
                         </div >
                     </div>
                 </div>
             </div>
         </div> 
+    </div>
+</div>
+
+
+
+<div class="modal fade bs-example-modal-center " id="new_prod_model" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 750px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cat_h5">Select Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="hidden" name="" id="obj_id" >
+            <div class="modal-body" style="background: #ffffff;" >
+                <div class="row">
+                    <div  >      
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    <label>Select Service</label>
+                                    <select class="form-select" onchange="getInventory('model_inventory_div')" id="model_category_id" name="select">
+                                        <option value="">Select...</option>
+                                        {% for i in catgory_obj %}
+                                            <option value="{{i.id}}">{{i.category_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    <label>Product Number</label>
+                                    <input type="number" onchange="getInventory('model_inventory_div')" id="model_product_no" class="form-control" placeholder="Enter Product Number">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" onchange="getInventory('model_inventory_div')"  id="model_product_name" class="form-control" placeholder="Enter Product Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" id="model_inventory_div">
+                        </div>
+                    </div >
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

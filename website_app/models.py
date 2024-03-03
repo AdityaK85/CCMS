@@ -2,6 +2,9 @@ from django.db import models
 import datetime
 # Create your models here.
 
+class Admin(models.Model):
+    username =  models.CharField(max_length = 200, blank = True, null = True)
+    password =  models.CharField(max_length = 200, blank = True, null = True)
 
 class CategoryMaster(models.Model):
     category_name = models.CharField(max_length = 200, blank = True, null = True)
@@ -17,6 +20,15 @@ class CityMaster(models.Model):
     name = models.CharField(max_length = 100 , blank = True , null = True)
     state_id = models.ForeignKey(StateMaster, on_delete=models.CASCADE, blank=True, null=True)
 
+class PurchasedMaster(models.Model):
+    vendor_code = models.CharField(max_length = 200, blank = True, null = True)
+    vendor_name = models.CharField(max_length = 200, blank = True, null = True)
+    purchased_dt = models.DateField(blank = True, null = True)
+    phone = models.CharField(max_length = 200, blank = True, null = True)
+    mail = models.CharField(max_length = 200, blank = True, null = True)
+    other_link = models.CharField(max_length = 200, blank = True, null = True)
+    note = models.TextField(blank = True, null = True)
+    created_dt = models.DateTimeField(blank=True , null= True , default= datetime.datetime.now())
 
 class InventoryMaster(models.Model):
     product_name = models.CharField(max_length = 200, blank = True, null = True)
@@ -25,7 +37,7 @@ class InventoryMaster(models.Model):
     model = models.CharField(max_length = 200, blank = True, null = True )
     quantity = models.CharField(max_length = 200, blank = True, null = True)
     unit_price = models.CharField(max_length = 200, blank = True, null = True)
-    supplier_info = models.CharField(max_length = 200, blank = True, null = True)
+    supplier_info = models.ForeignKey(PurchasedMaster, on_delete=models.CASCADE , blank = True, null = True)
     note = models.TextField(blank = True, null = True)
     created_dt = models.DateTimeField(blank=True , null= True , default= datetime.datetime.now())
 
@@ -52,3 +64,4 @@ class SalesProducts(models.Model):
     qty = models.CharField(max_length = 200, blank = True, null = True)
     total_amount = models.CharField(max_length = 200, blank = True, null = True)
     
+

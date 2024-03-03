@@ -7,6 +7,10 @@ from .models import *
 class InventoryMasterAdmin(admin.ModelAdmin):
     list_display = ('id' , 'product_name', 'product_no', 'fk_category')
 
+@admin.register(Admin)
+class AdminAdmin(admin.ModelAdmin):
+    list_display = ('id' , 'username', 'password')
+
 @admin.register(CountryMaster)
 class CountryMasterAdmin(admin.ModelAdmin):
     list_display = ('id' , 'country_name')
@@ -31,3 +35,7 @@ class SalesMasterAdmin(admin.ModelAdmin):
 @admin.register(SalesProducts)
 class SalesProductsAdmin(admin.ModelAdmin):
     list_display = ('id' , 'fk_sale', 'fk_product', 'qty', 'total_amount')
+
+@admin.register(PurchasedMaster)
+class PurchasedMasterAdmin(admin.ModelAdmin):
+    list_display = ('id' , 'vendor_code', 'vendor_name', 'purchased_dt', 'phone')

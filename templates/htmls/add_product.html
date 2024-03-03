@@ -19,19 +19,19 @@
 <div class="tab-content">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Add Product</h3>
+            <h3 class="card-title"> {% if prod_obj %} Update Product {% else %}  Add Product  {% endif %}</h3>
         </div>
         <form class="card-body">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Name <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <input type="text" id="product_name" class="form-control">
+                    <input type="text" id="product_name" value="{{prod_obj.product_name}}" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Product Number <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <input type="text" id="product_no" class="form-control">
+                    <input type="text" disabled id="product_no" value="{{prod_obj.product_no}}" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
@@ -40,7 +40,7 @@
                     <select class="form-control" id="category_name" name="select">
                         <option value="">Select...</option>
                         {% for i in catgory_obj %}
-                            <option value="{{i.id}}">{{i.category_name}}</option>
+                            <option {% if prod_obj.fk_category.id == i.id %} selected {% endif %} value="{{i.id}}">{{i.category_name}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -49,40 +49,46 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Model <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <input type="text" id="model" class="form-control">
+                    <input type="text" id="model" value="{{prod_obj.model}}" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Quantity <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <input type="text" id="quantity" class="form-control">
+                    <input type="text" id="quantity" value="{{prod_obj.quantity}}" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Unit Price <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <input type="text"id="unit_price" class="form-control">
+                    <input type="text"id="unit_price" class="form-control" value="{{prod_obj.unit_price}}" >
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Supplier Info <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <input type="text" id="supplier_info" class="form-control">
+                    <select class="form-control" id="supplier_info" name="select">
+                        <option value="">Select...</option>
+                        {% for i in vendor_obj %}
+                            <option {% if prod_obj.supplier_info.id == i.id %} selected {% endif %} value="{{i.id}}">{{i.vendor_name}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Note <span class="text-danger">*</span></label>
                 <div class="col-md-6">
-                    <textarea rows="4" id="note" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                    <textarea rows="4" id="note" class="form-control no-resize" placeholder="Please type what you want...">{{prod_obj.note}}</textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"></label>
                 <div class="col-md-6">
-                    <button type="button" onclick="SaveInventory(this , '')" class="btn btn-primary">Submit</button>
+                    <button type="button" onclick="SaveInventory(this , '{{prod_obj.id}}')" class="btn btn-primary">Submit</button>
                     <button type="button"  class="btn btn-outline-secondary">Cancel</button>
                 </div>
             </div>
+            <input type="hidden" name="" id="prod_id" value="{{prod_obj.id}}"  >
         </form>
     </div>
 </div>

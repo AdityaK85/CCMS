@@ -1,0 +1,31 @@
+<table class="table table-striped mb-0 text-nowrap">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Vendor</th>
+            <th>CODE</th>
+            <th>Purchased Date</th>
+            <th>Purchased Amount</th>
+            <th>Contact</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in vendor_obj %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.vendor_name}}</td>
+            <td>{{i.vendor_code}}</td>
+            <td>{{i.purchased_dt|date:'d-M-Y'}}</td>
+            <td>
+                <span class="tag tag-success">Rs. {{i.total_amt}} /-</span>
+            </td>
+            <td>{{i.phone}}</td>
+            <td>
+                <a href="/editVendor/{{i.id}}"><i class="fa fa-edit mx-2"></i></a>
+                <a role="button"  onclick="DeleteVendor('{{i.id}}')"  ><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

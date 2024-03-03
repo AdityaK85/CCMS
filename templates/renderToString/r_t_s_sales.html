@@ -30,7 +30,8 @@
                         <span class="tag tag-orange">Pending</span>
                     {% endif %}
                     <a class="btn btn-icon btn-sm" href="/Invoice/{{i.id}}" data-toggle="tooltip" title="View Sale" data-original-title="Phone"><i class="fa fa-eye"></i></a>
-                    <a class="btn btn-icon btn-sm text-danger hidden-xs js-sweetalert" data-type="confirm" href="javascript:void(0)" data-toggle="tooltip" title="Delete Record" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+                    <a class="btn btn-icon btn-sm" role="button" onclick="AddNewProd('{{i.id}}')"  data-toggle="tooltip" title="Add Product" data-original-title="Phone"><i class="fa fa-plus"></i></a>
+                    <a class="btn btn-icon btn-sm text-danger hidden-xs js-sweetalert" data-type="confirm" href="javascript:void(0)" data-toggle="tooltip" title="Delete Record" data-original-title="Delete" onclick="DeleteSale('{{i.id}}')" ><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         {% endfor %}

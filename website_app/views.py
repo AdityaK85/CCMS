@@ -2,23 +2,54 @@ from django.shortcuts import render
 from Project_utilty.decorators import *
 from .models import *
 from django.template.loader import render_to_string
+from django.views.decorators.cache import cache_control
 
+def Login(request):
+    return render(request, 'htmls/login.html')
 
-def index(request):
-    return render(request , 'htmls/index.html')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def index(request , user):
+    sevice_count = CategoryMaster.objects.count()
+    inventory_count = InventoryMaster.objects.count()
+    sales_count = SalesMaster.objects.count()
+    purchase_count = PurchasedMaster.objects.count()
+    comp_name = SalesMaster.objects.all().order_by('id')[:5]
+    vendors = PurchasedMaster.objects.all().order_by('id')[:5]
+    for i in vendors:
+        i.purch_count = InventoryMaster.objects.filter(supplier_info_id = i.id).count()
 
-def AddInventory(request):
+    context = {
+        'service_count' : sevice_count,
+        'inven_count' : inventory_count,
+        'sales_count' : sales_count,
+        'purchase_count' : purchase_count, 
+        'comp_name' : comp_name , 
+        'vendors' : vendors
+    }
+    return render(request , 'htmls/index.html' , context)
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def AddInventory(request , user):  
     catgory_obj = CategoryMaster.objects.all().order_by('category_name')
-    context = {'catgory_obj' : catgory_obj}
+    vendor_obj = PurchasedMaster.objects.all().order_by('-id')
+    context = {'catgory_obj' : catgory_obj , 'vendor_obj' : vendor_obj }
     return render(request , 'htmls/add_product.html', context)
 
-def Inventory(request):
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def Inventory(request  , user):
     inventory_obj = InventoryMaster.objects.all().order_by('-id')
     rendered = render_to_string('renderToString/r_t_s_inventory.html', {'inventory_obj' : inventory_obj})
     context = {'render_str' : rendered }
     return render(request , 'htmls/Inventory.html', context)
 
-def Sales(request):
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def Sales(request , user):
     country_list = CountryMaster.objects.all().order_by('-country_name')
     catgory_obj = CategoryMaster.objects.all().order_by('category_name')
     sale_obj = SalesMaster.objects.all().order_by('-id')
@@ -28,7 +59,10 @@ def Sales(request):
     context = {'render_str' : rendered , 'catgory_obj' : catgory_obj , 'country_list': country_list}
     return render(request , 'htmls/Blog.html', context)
 
-def Invoice(request , id):
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def Invoice(request , user, id):
     invoice_obj = SalesMaster.objects.filter(id = id).last()
     product_obj = SalesProducts.objects.filter(fk_sale_id = id)
     total_amount = 0
@@ -38,8 +72,54 @@ def Invoice(request , id):
     return render(request , 'htmls/invoice.html', {'invoice_obj': invoice_obj , 'product_obj': product_obj , 'total_amount': total_amount})
 
 
-def Votings(request):
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def Purchased(request  , user):
     return render(request , 'htmls/Voting.html')
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def Categories(request  , user):
+    cat_obj = CategoryMaster.objects.all().order_by('-id')
+    rendered = render_to_string('renderToString/r_t_s_category.html', {'cat_obj' : cat_obj})
+    context = {'render_str' : rendered }
+    return render(request , 'htmls/Categories.html' , context)
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def editVendor(request , user ,id):
+    purch_obj = PurchasedMaster.objects.get(id = id)
+    return render(request , 'htmls/Voting.html', {'purch_obj':purch_obj})
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def editProduct(request  , user, id):
+    prod_obj = InventoryMaster.objects.get(id = id)
+    catgory_obj = CategoryMaster.objects.all().order_by('category_name')
+    vendor_obj = PurchasedMaster.objects.all().order_by('-id')
+    context = {'catgory_obj' : catgory_obj , 'vendor_obj' : vendor_obj , 'prod_obj':prod_obj}
+    return render(request , 'htmls/add_product.html', context)
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def ManageVendors(request , user):
+    vendor_obj = PurchasedMaster.objects.all().order_by('-id')
+    for i in vendor_obj:
+        total_purch_amt = 0
+        i.total_amt = 0
+        if InventoryMaster.objects.filter(supplier_info_id=i.id).exists():
+            supplier_obj = InventoryMaster.objects.filter(supplier_info_id=i.id).values('quantity', 'unit_price')
+            total = sum([int(item['quantity']) * float(item['unit_price']) for item in supplier_obj])
+            i.total_amt = total
+            total_purch_amt += total
+            
+    rendered = render_to_string('renderToString/r_t_s_manage_vendor.html', {'vendor_obj' : vendor_obj})
+    context = {'render_str' : rendered }
+    return render(request , 'htmls/Vendors.html', context)
 
 
 

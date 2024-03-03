@@ -1,0 +1,21 @@
+<table id="cat_tbl" class="table table-hover js-basic-example dataTable table-striped table_custom border-style spacing5">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in  cat_obj %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.category_name}}</td>
+                <td>
+                    <a href="javascript:void(0)" class="btn btn-warning btn-sm"  onclick="ServiceModel('{{i.id}}' , '{{i.category_name}}')" ><i class="fa fa-edit mx-1"></i> Edit</a>
+                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="DeleteCategory('{{i.id}}')" ><i class="fa fa-trash mx-1"></i> Del</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -57,19 +57,31 @@ window.getStates = async function(id , type){
     }
 }
 
+var inventory_div = 'inventory_div'
 
-window.getInventory = async function(){
-    var category_id = $("#category_id").val()
-    var product_no = $("#product_no").val()
-    var product_name = $("#product_name").val()
+window.getInventory = async function(div){
+    inventory_div = div
+    var obj_id = $("#obj_id").val()
+    if (inventory_div == 'inventory_div'){
+        var category_id = $("#category_id").val()
+        var product_no = $("#product_no").val()
+        var product_name = $("#product_name").val()
+    }
+    else {
+        var category_id = $("#model_category_id").val()
+        var product_no = $("#model_product_no").val()
+        var product_name = $("#model_product_name").val()
+    }
+
     var data = {
         'cat_id' : category_id , 
         'product_no' : product_no , 
         'product_name' : product_name , 
+        'sale_id' : obj_id , 
     }
     var response = await callAjax('/GetInventory/' , data )
     if (response.status == 1){
-        $("#inventory_div").html(response.render_str)
+        $(`#${inventory_div}`).html(response.render_str)
     }
      
 }
@@ -133,10 +145,73 @@ window.sale_product = async function(prod_id , qty_field, total_amt_field , on_u
 
         var response = await callAjax('/Add_Prod_On_Sale/' , data )
         if (response.status == 1){
-            $("#inventory_div").html(response.render_str)
+            $(`#${inventory_div}`).html(response.render_str)
             showToastMsg('Success' , response.msg , 'success')
         }
 
     }
 
+}
+
+
+window.AddNewProd = function(sale_id){
+    var obj_id = $("#obj_id").val(sale_id)
+    var new_prod_model = new bootstrap.Modal(document.getElementById("new_prod_model"))
+    new_prod_model.show()
+    new_prod_model._element.addEventListener('hidden.bs.modal', function () {
+        $('#obj_id').val('');
+        $(`#${inventory_div}`).html('')
+        $("#model_category_id").prop('selectedIndex', 0);
+        inventory_div = 'inventory_div'
+    });
+}
+
+
+window.remove_product = async function(prod_id){
+    var obj_id = $("#obj_id").val()
+    var category_id = $("#category_id").val()
+    var product_no = $("#product_no").val()
+    var product_name = $("#product_name").val()
+
+    var data = {
+        'id':prod_id,
+        'sale_id':obj_id,
+        'cat_id' : category_id , 
+        'product_no' : product_no , 
+        'product_name' : product_name ,
+    }
+    var response = await callAjax('/Remove_Prod_From_List/' , data )
+        if (response.status == 1){
+            $(`#${inventory_div}`).html(response.render_str)
+            showToastMsg('Success' , response.msg , 'success')
+        }
+}
+
+
+
+
+window.DeleteSale = async function(id)
+{
+ 
+    var preference = await sweetAlertMsg('Delete Record', "Do you want to delete this Sale Record?", 'question', 'cancel', 'Yes', )
+   
+    var data = {
+        'id': id,
+    }
+
+    if (preference)
+    {
+        
+        var response = await callAjax('/DeleteSale/', data );
+        if (response.status == 1)
+        {
+            showToastMsg('Sucess',response.msg, 'success'); 
+			await new Promise(resolve => setTimeout(resolve, 1500)); 
+			location.reload();
+        }
+        else 
+        {
+            showToastMsg("Error", response.msg, 'error');
+        }
+    } 
 }

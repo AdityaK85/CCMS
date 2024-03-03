@@ -10,7 +10,7 @@
 {% block customStyles %}{% endblock %}
 
 {% block breadcrumb %}
-	<li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">BUSSINESS Dashboard</strong></li>
+	<!-- <li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">BUSSINESS Dashboard</strong></li> -->
 {% endblock %}
 
 {% block content %}
@@ -21,40 +21,43 @@
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="card">
                         <div class="card-body ribbon">
-                            <div class="ribbon-box green" data-toggle="tooltip" title="" data-original-title="New Professors">5</div>
+                            <div class="ribbon-box green" data-toggle="tooltip" title="" data-original-title="New Professors">{{service_count}}</div>
                             <a href="professors.html" class="my_sort_cut text-muted">
                                 <i class="fa fa-black-tie"></i>
-                                <span>Featured Courses</span>
+                                <span>Services</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body ribbon">
+                            <div class="ribbon-box green" data-toggle="tooltip" title="" data-original-title="New Professors">{{sales_count}}</div>
                             <a href="app-contact.html" class="my_sort_cut text-muted">
                                 <i class="fa fa-address-book"></i>
-                                <span>Testimonials</span>
+                                <span>Sales</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body ribbon">
+                            <div class="ribbon-box green" data-toggle="tooltip" title="" data-original-title="New Professors">{{purchase_count}}</div>
                             <a href="app-filemanager.html" class="my_sort_cut text-muted">
                                 <i class="fa fa-folder"></i>
-                                <span>Blogs</span>
+                                <span>Purchased</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body ribbon">
+                            <div class="ribbon-box green" data-toggle="tooltip" title="" data-original-title="New Professors">{{inven_count}}</div>
                             <a href="library.html" class="my_sort_cut text-muted">
                                 <i class="fa fa-book"></i>
-                                <span>Work With Us</span>
+                                <span>Inventory</span>
                             </a>
                         </div>
                     </div>
@@ -64,107 +67,53 @@
     </div>
 </div>
 
+
 <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Upcomming Courses & Videos</h3>
-                    <div class="card-options">
-                        <button class="btn btn-primary btn-lg btn-simple" ><i class="fe fe-plus"></i> Suggest Topic</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped mb-0 text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Assigned Professor</th>
-                                    <th>Date Of Admit</th>
-                                    <th>Fees</th>
-                                    <th>Branch</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Jens Brincker</td>
-                                    <td>Kenny Josh</td>
-                                    <td>27/05/2016</td>
-                                    <td>
-                                        <span class="tag tag-success">paid</span>
-                                    </td>
-                                    <td>Mechanical</td>
-                                    <td>
-                                        <a href="javascript:void(0)"><i class="fa fa-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Mark Hay</td>
-                                    <td> Mark</td>
-                                    <td>26/05/2018</td>
-                                    <td>
-                                        <span class="tag tag-warning">unpaid</span>
-                                    </td>
-                                    <td>Science</td>
-                                    <td>
-                                        <a href="javascript:void(0)"><i class="fa fa-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Anthony Davie</td>
-                                    <td>Cinnabar</td>
-                                    <td>21/05/2018</td>
-                                    <td>
-                                        <span class="tag tag-success ">paid</span>
-                                    </td>
-                                    <td>Commerce</td>
-                                    <td>
-                                        <a href="javascript:void(0)"><i class="fa fa-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>David Perry</td>
-                                    <td>Felix </td>
-                                    <td>20/04/2019</td>
-                                    <td>
-                                        <span class="tag tag-danger">unpaid</span>
-                                    </td>
-                                    <td>Mechanical</td>
-                                    <td>
-                                        <a href="javascript:void(0)"><i class="fa fa-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Anthony Davie</td>
-                                    <td>Beryl</td>
-                                    <td>24/05/2017</td>
-                                    <td>
-                                        <span class="tag tag-success ">paid</span>
-                                    </td>
-                                    <td>M.B.A.</td>
-                                    <td>
-                                        <a href="javascript:void(0)"><i class="fa fa-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>  
-                </div>
+    <div class="col-xl-6 col-md-12">
+        <div class="card">
+            <div class="card-header" style="margin-bottom: -36px;" >
+                <h3 class="card-title">Top Sales</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <ul>
+                        <li>Companies</li>
+                    </ul>
+                    {% for i in comp_name %}
+                        <li class="list-group-item mt-2">
+                            <b>{{forloop.counter}}  </b> <i class="fa fa-star text-warning " ></i>
+                            <div class="profile-desc-item pull-right">{{i.company_name}}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
+    <div class="col-xl-6 col-md-12">
+        <div class="card">
+            <div class="card-header" style="margin-bottom: -36px;">
+                <h3 class="card-title">Top Purchased</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <ul>
+                        <li>Vendors</li>
+                    </ul>
+                    <li class="list-group-item mt-2">
+                        {% for i in vendors %}
+                        <div class="clearfix ">
+                            <div class="float-left"><strong>{{i.vendor_name}}</strong></div>
+                            <div class="float-right"><small class="text-muted">{{i.purch_count}} Products </small></div>
+                        </div>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
 

@@ -34,9 +34,9 @@ def is_admin_authenticated(request):
 		
         if user_type and user_id:
             if user_type == 'admin':
-                user = Admin_Login.objects.get(id=user_id)
+                user = Admin.objects.get(id=user_id)
             else:
-                user = MyUser.objects.get(id=user_id)
+                user = Admin.objects.get(id=user_id)
             return user
         else:
             return None

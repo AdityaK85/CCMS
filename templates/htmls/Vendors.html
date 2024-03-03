@@ -1,0 +1,47 @@
+{% extends 'layout/base.html' %}
+
+
+{% load static %}
+
+{% block title %}BestThings{% endblock %}
+
+{% block customCDNS %}{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	{% comment %} <li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">BUSSINESS Dashboard</strong></li> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+   
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Vendors</h3>
+                <div class="card-options">
+                    <a href="/Purchased" class="btn  btn-primary btn-sm btn-simple" ><i class="fe fe-plus"></i> Add Vendor</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {{render_str}}
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customScripts %}
+		<script type="module" src="{% static 'adminpanel/panel_js/inventory.js' %}"></script>
+
+<script>
+
+</script>
+
+{% endblock %}

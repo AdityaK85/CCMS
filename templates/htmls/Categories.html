@@ -1,0 +1,83 @@
+{% extends 'layout/base.html' %}
+
+
+{% load static %}
+
+{% block title %}BestThings{% endblock %}
+
+{% block customCDNS %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.material.min.css" integrity="sha512-xvrm5KqgBtR7kE0ehXfSSkQvzArzm/iBSx6aXcINru5dM0YWCaqrHfsN1PHCQBgL03/7fJHqypWZoA5w0T6lMA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	{% comment %} <li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">BUSSINESS Dashboard</strong></li> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+   
+  
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Services</h3>
+                <div class="card-options">
+                    <button class="btn btn-primary btn-lg btn-simple" onclick="ServiceModel('', '')" ><i class="fe fe-plus"></i> New </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" id="service_div">
+                    {{render_str}}
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bs-example-modal-sm " id="service_model" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cat_h5">Service</h5>
+                <button type="button" id="service_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="hidden" name="" id="service_id" >
+            <div class="modal-body" style="background: #ffffff;" >
+                <div class="row">
+                    <div  >      
+                        <div class="row clearfix">
+                            <div class="col-lg-10 col-md-12">
+                                <div class="form-group">
+                                    <label>Service Name</label>
+                                    <input type="text" id="service_field" class="form-control" placeholder="Enter Service Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-12 mt-4" style="margin-top: 29px !important;" >
+                                <div class="form-group">
+                                    <button class="btn btn-success " onclick="SaveService()" >Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block customScripts %}
+		<script type="module" src="{% static 'adminpanel/panel_js/inventory.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+</script>
+
+{% endblock %}
