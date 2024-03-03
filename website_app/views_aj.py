@@ -44,12 +44,14 @@ def SaveInventory(request):
         obj.fk_category_id = request.POST.get('category_name')
         obj.supplier_info_id = request.POST.get('supplier_info')
         obj.save()
+        msg = "Inventory Modified"
     else:
         obj = InventoryMaster.objects.create(**data)
         obj.fk_category_id = request.POST.get('category_name')
         obj.supplier_info_id = request.POST.get('supplier_info')
         obj.save()
-    send_data = {'status': 1 , 'msg' : f'Inventory { 'Modified' if val_id != '' else 'Saved' }   Successfully' }
+        msg = "Inventory Saved"
+    send_data = {'status': 1 , 'msg' : msg }
     return JsonResponse(send_data)
 
 @csrf_exempt
