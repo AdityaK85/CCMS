@@ -1,0 +1,91 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block title %}CCMS{% endblock %}
+
+{% block customCDNS %}{% endblock %}
+
+{% block customStyles %}{% endblock %}
+
+{% block breadcrumb %}
+	<li class="breadcrumb-item active" aria-current="page"><strong style="font-size: larger;font-weight: bolder;">Reports</strong></li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row ">
+    <div class="col-sm-12 col-lg-6">
+        <div class="card " >
+            <div class="card-status bg-green"></div>
+            <div class="card-body">
+                <div class="card-category"><strong>Sales Report</strong></div>
+                <div>
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="">From Date</label>
+                                <input type="date" class="form-control" name="" id="from_dt">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="date" class="form-control" name="" id="to_dt">
+                            </div>
+                        </div>
+                        <div class="col-2 my-2">
+                            <div class="form-group">
+                                <button class="btn mt-4 btn-sm btn-success" onclick="filter_sale_report(this)" >Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="display-5 my-4">Revenue : <span style="font-weight: bold;" id="total_rev" >{{total_rev}}</span> /-</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+        <div class="card " >
+            <div class="card-status bg-green"></div>
+            <div class="card-body">
+                <div class="card-category"><strong>Inventory Report</strong></div>
+                <div>
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="">From Date</label>
+                                <input type="date" class="form-control" name="" id="from_dt_inven">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="date" class="form-control" name="" id="to_dt_inven">
+                            </div>
+                        </div>
+                        <div class="col-2 my-2">
+                            <div class="form-group">
+                                <button class="btn mt-4 btn-sm btn-success" onclick="filter_inventory_report(this)" >Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="display-5 my-4">Revenue : <span style="font-weight: bold;" id="inventory_rev" >{{inventory_rev}}</span> /-</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customScripts %}
+<script type="module" src="{% static 'adminpanel/panel_js/purchased.js' %}"></script>
+
+<script>
+
+</script>
+
+{% endblock %}

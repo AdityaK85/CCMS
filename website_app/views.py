@@ -121,6 +121,26 @@ def ManageVendors(request , user):
     context = {'render_str' : rendered }
     return render(request , 'htmls/Vendors.html', context)
 
+from django.db.models import Sum
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@handle_admin_page_exception
+def Reports(request , user):
+    
+    obj = SalesProducts.objects.all().count()
+    total_rev = SalesProducts.objects.all().aggregate(total_rev=Sum('total_amount'))
+    inventory_items = InventoryMaster.objects.all()
+
+    total_revenue = 0
+    for item in inventory_items:
+        quantity = int(item.quantity)
+        unit_price = float(item.unit_price)
+        item_revenue = quantity * unit_price
+        total_revenue += item_revenue
+        
+    context = {'obj': obj , 'total_rev' : total_rev['total_rev'] ,  'inventory_rev' : total_revenue }
+    return render(request , 'htmls/reports.html', context)
+
 
 
 import pandas as pd

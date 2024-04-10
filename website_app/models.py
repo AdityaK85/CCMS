@@ -63,5 +63,6 @@ class SalesProducts(models.Model):
     fk_product = models.ForeignKey(InventoryMaster, on_delete=models.CASCADE)
     qty = models.CharField(max_length = 200, blank = True, null = True)
     total_amount = models.CharField(max_length = 200, blank = True, null = True)
+    created_dt = models.DateTimeField(blank=True , null= True , default= datetime.datetime.now())
     
 

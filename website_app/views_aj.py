@@ -260,3 +260,24 @@ def Remove_Prod_From_List(request):
             i.prev_price = sale_obj.total_amount
     rendered = render_to_string('renderToString/r_t_s_get_inventory.html', {'get_obj' : get_obj})
     return JsonResponse({'status':1, 'msg':'Product List Updated' , 'render_str': rendered })
+
+
+from django.db.models import Sum
+
+@csrf_exempt
+@handle_ajax_exception
+def filter_report(request):
+    from_dt = request.POST.get("from_dt")
+    to_dt = request.POST.get("to_dt")
+    
+    total_rev = SalesProducts.objects.filter(created_dt__date__lte = to_dt , created_dt__date__gte = from_dt ).aggregate(total_rev=Sum('total_amount'))
+    inventory_items = InventoryMaster.objects.filter(created_dt__date__lte = to_dt , created_dt__date__gte = from_dt )
+
+    total_revenue = 0
+    for item in inventory_items:
+        quantity = int(item.quantity)
+        unit_price = float(item.unit_price)
+        item_revenue = quantity * unit_price
+        total_revenue += item_revenue
+    
+    return JsonResponse({ 'status':1, 'total_rev' : total_rev['total_rev'] if total_rev['total_rev'] != None  else 0  ,  'inventory_rev' : total_revenue})

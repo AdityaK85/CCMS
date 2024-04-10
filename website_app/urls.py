@@ -16,6 +16,7 @@ admin_urls = [
     path('editVendor/<int:id>', editVendor),
     path('editProduct/<int:id>', editProduct),
     path('Manage-Vendor/', ManageVendors),
+    path('Reports/', Reports),
 ]
 
 
@@ -35,6 +36,7 @@ ajax_urls = [
     path('DeleteService/', DeleteService),
     path('Remove_Prod_From_List/', Remove_Prod_From_List),
     path('SaveService/', SaveService),
+    path('filter_report/', filter_report),
 ]
 
 

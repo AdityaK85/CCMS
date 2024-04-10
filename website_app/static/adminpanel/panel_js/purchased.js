@@ -39,3 +39,99 @@ window.SavePurchased = async function(this_, val_id){
         }
     }
 }
+
+
+var current_dt = new Date();
+var Today_dt = current_dt.toISOString().split('T')[0];
+$('#from_dt').attr('max', Today_dt);
+
+$('#from_dt').change(function()
+{
+    var from_date = $("#from_dt").val();
+    $('#to_dt').attr('min',from_date)
+});
+
+
+$('#to_dt').change(function()
+{
+    var to_date = $("#to_dt").val();
+    $('#from_dt').attr('max',to_date)
+});
+
+
+
+
+$('#from_dt_inven').attr('max', Today_dt);
+
+$('#from_dt_inven').change(function()
+{
+    var from_date = $("#from_dt_inven").val();
+    $('#to_dt_inven').attr('min',from_date)
+});
+
+
+$('#to_dt_inven').change(function()
+{
+    var to_date = $("#to_dt_inven").val();
+    $('#from_dt_inven').attr('max',to_date)
+});
+
+
+window.filter_sale_report = async function(this_){
+    var from_dt = $("#from_dt").val()
+    var to_dt = $("#to_dt").val()
+    
+    log(from_dt , to_dt)
+    if (from_dt.trim() != '' &&  to_dt.trim() == '') {
+        showToastMsg("Error", "Please enter To date.", 'error');
+        $("#to_dt").focus()
+    } 
+    else if (from_dt.trim() == '' &&  to_dt.trim() != '') {
+        showToastMsg("Error", "Please enter From date.", 'error');
+        $('#from_dt').focus()
+    }
+    else {
+        var data = {
+            'from_dt':from_dt,
+            'to_dt':to_dt,
+        }
+        var response = await callAjax('/filter_report/', data , this_ , 'Filtering...', 'Filtered');
+        if (response.status == 1) {
+            $("#total_rev").html(response.total_rev)
+        }
+        else {
+            showToastMsg("Error", 'Something Went Wrong...', 'error')
+        }   
+    }
+
+}
+
+
+window.filter_inventory_report = async function(this_){
+    var from_dt = $("#from_dt_inven").val()
+    var to_dt = $("#to_dt_inven").val()
+
+    log(from_dt , to_dt)
+    if (from_dt.trim() != '' &&  to_dt.trim() == '') {
+        showToastMsg("Error", "Please enter To date.", 'error');
+        $("#to_dt").focus()
+    } 
+    else if (from_dt.trim() == '' &&  to_dt.trim() != '') {
+        showToastMsg("Error", "Please enter From date.", 'error');
+        $('#from_dt').focus()
+    }
+    else {
+        var data = {
+            'from_dt':from_dt,
+            'to_dt':to_dt,
+        }
+        var response = await callAjax('/filter_report/', data , this_ , 'Filtering...', 'Filtered');
+        if (response.status == 1) {
+            $("#inventory_rev").html(response.inventory_rev)
+        }
+        else {
+            showToastMsg("Error", 'Something Went Wrong...', 'error')
+        }   
+    }
+
+}
